@@ -1,0 +1,35 @@
+commit jasdi321as1d3ad1as34da6as46d4a6da46a
+Author: authorName
+Date:   Fri Jun 24 14:24:36 2016 -0300
+
+    [ClassA] : Title
+    
+    Description:
+    Implement upperCase for some fields.
+    
+    Jira:
+    JIRALink_ID_496
+
+@@ -182,19 +182,19 @@ public class ClassA extends ScriptSlave<Master> {
+     }
+ 
+     private void createAttribute(Element parentElement, String attr, String item,
+-            String defaultValue) {
++            String defaultValue, boolean upperCase) {
+         if (item != null || ClassUtuils.isNotEmpty(defaultValue)) {
+             String value = x.getValue(item, true);
+             String result = ClassUtils.isNotEmpty(value) ? value : defaultValue;
+             if (ClassUtils.isNotEmpty(result)) {
+-                parentElement.setAttribute(new Attribute(attr, result));
++                parentElement.setAttribute(new Attribute(attr, upperCase ? result.toUpperCase() : result));
+             }
+         }
+     }
+ 
+     private void createEmptyAttributeIfNoValue(Element parentElement, String attr, String item, String defaultValue) {
+         if (item != null || ClassUtils.isNotEmpty(defaultValue)) {
+-            createAttribute(parentElement, attr, item, defaultValue);
++            createAttribute(parentElement, attr, item, defaultValue, false);
+         } else {
+             parentElement.setAttribute(new Attribute(attr, ""));
+         }
